@@ -1,0 +1,246 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+
+
+
+
+
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #A01FC9;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {margin:0;}
+
+.icon-bar { 
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.icon-bar a {
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 12px 0;
+  transition: all 0.1s ease;
+  color: white;
+  font-size: 30px;
+}
+
+.icon-bar a:hover {
+  background-color: #324;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+</style>
+<head>
+  
+
+<script type = "text/javascript" src="./demofile.json"></script>
+
+<script type = "text/javascript">
+  function readJson()
+
+{
+  var countryname1 = document.getElementById("demo").value;
+  var countryname2 = document.getElementById("demo2").value;
+  var graphValue = ""
+  var graphValue2 = ""
+
+  if (countryname2 == "Choose another country" || countryname1 == "Choose a country")
+  {
+
+        alert("Please select 2 countries");
+  }
+
+  else {        
+
+    for(i=0; i<obj.length-2; i++){
+
+      if (obj[i].dims.COUNTRY == countryname1){
+
+
+           graphValue = obj[i].Value.split(" ");
+
+        break
+      }
+    }
+    if (graphValue[0] == "")
+      graphValue[0] == 0
+
+    for(i=0; i<obj.length; i=i+1){
+      if (obj[i].dims.COUNTRY == countryname2){
+        
+       graphValue2 = obj[i].Value.split(" ");
+
+        break
+      }
+    }
+
+  new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: [countryname1, countryname2],
+      datasets: [
+        {
+          label: "Number of Deaths",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [graphValue[0],graphValue2[0]]
+        }
+      ]
+    },
+    options: {
+      scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Number of deaths due to HIV and AIDS'
+      }
+    }
+});
+}
+
+}
+</script>
+
+</head>
+<body onload='openJSON()'>
+
+
+<div class="icon-bar">
+  <a class="active" href="#"><i class="fa fa-home"></i></a> 
+  <a href="#"><i class="fa fa-envelope"></i></a> 
+  <a href="#"><i class="fa fa-info"></i></a> 
+</div>
+
+
+<select id="demo" onchange="myFunction1()"></select>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+
+var country_list = ["Choose a country", "Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas" ,"Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands" ,"Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica" ,"Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea" ,"Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana" ,"Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India" ,"Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia" ,"Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania" ,"Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia" ,"New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal" ,"Puerto Rico","Qatar","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles" ,"Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan" ,"Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia" ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","Uruguay" ,"Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+var options = "";
+var i;
+for (i = 0; i < country_list.length; i++) {
+  options += "<option>"+country_list[i] + "</option>";
+}
+document.getElementById("demo").innerHTML = options;
+</script>
+
+<select id="demo2" onchange="myFunction2()"></select>
+
+
+
+<script>
+var country_list2 = ["Choose another country", "Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas" ,"Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands" ,"Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica" ,"Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea" ,"Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana" ,"Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India" ,"Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia" ,"Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania" ,"Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia" ,"New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal" ,"Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles" ,"Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan" ,"Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia" ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","Uruguay" ,"Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+var options = "";
+var i;
+var obj; 
+var myJSON;
+for (i = 0; i < country_list2.length; i++) {
+  options += "<option>"+country_list2[i] + "</option>";
+}
+document.getElementById("demo2").innerHTML = options;
+
+</script>
+
+
+
+
+
+
+<button onclick="readJson()"class="button" style="vertical-align:middle"><span>Generate Data! </span></button>
+  <div id = "main"></div>
+  <canvas id="bar-chart" width="1200" height="400"></canvas>
+
+<script>
+
+function myFunction1() {
+  //SO HERE WE ARE GOING TO TELL THE COMPUTER THAT WE NEED TO RUN A FUNCTIGON TAHT WE ARE CHANGING THE THUNY// GET THE VALUE OF THE DROPDOWN OR SELECT THIGNY GET VALUE
+  return document.getElementById("demo").value
+}
+function myFunction2() {
+  return document.getElementById("demo2").value
+
+
+}
+
+function openJSON() {
+
+   obj = JSON.parse(dimensions);
+   myJSON = JSON.stringify(obj);
+
+}
+
+
+
+
+
+
+</script>
+  <!--HERE WE NEED TO GENERATE A GRAPH-->
+</body>
+</html> 
